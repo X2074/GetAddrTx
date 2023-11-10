@@ -9,7 +9,6 @@ function DownloadButton({ data, headers, filename }: {
         to: string,
         hash: string,
         value: string,
-        input: string
     }>;
     headers: string[];
     filename: string

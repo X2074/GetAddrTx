@@ -4,30 +4,49 @@ import Web3, {HttpProvider} from 'web3';
 import DownloadButton from '@/components/DownloadButton'; // 导入 DownloadButton 组件
 
 // 定义以太坊交易对象类型
-interface EthereumTransaction {
+interface Transaction {
     blockNumber: string; // 区块号
     from: string; // 发送方地址
-    to: string | null; // 接收方地址（可以为 null）
+    to: string; // 接收方地址
     hash: string; // 交易哈希
     value: string; // 交易价值
 }
 
+interface EthereumTransaction {
+    blockHash: string;
+    blockNumber: string;
+    chainId: string;
+    from: string;
+    gas: string;
+    gasPrice: string;
+    hash: string;
+    input: string;
+    nonce: string;
+    r: string;
+    s: string;
+    to: string;
+    transactionIndex: string;
+    type: string;
+    v: string;
+    value: string;
+}
+
 export function ScanBlocks({ web3Provider }: { web3Provider: Web3 }) {
-    const [addresses, setAddresses] = useState([]);
+    const [addresses, setAddresses] = useState<string[]>([]);
     const [startBlock, setStartBlock] = useState(0);
     const [endBlock, setEndBlock] = useState(0);
-    const [transactionData, setTransactionData] = useState([]);
+    const [transactionData, setTransactionData] = useState<Transaction[]>([]);
     const [clicked, setClicked] = useState(false);
     const [tableHeaders, setTableHeaders] = useState<string[]>([]);
 
     const fetchData = useCallback( async () => {
         const web3 = new Web3(web3Provider);
-        console.log('web3Provider:', web3Provider);
-        const transactions: EthereumTransaction[] = [];
+        // console.log('web3Provider:', web3Provider);
+        const transactions: Transaction[] = [];
 
         for (let i = startBlock; i <= endBlock; i++) {
             const block = await web3.eth.getBlock(i, true);
-            console.log(block.transactions);
+            // console.log(block.transactions);
 
             if (block.transactions.length === 0) {
                 continue;
@@ -35,21 +54,23 @@ export function ScanBlocks({ web3Provider }: { web3Provider: Web3 }) {
 
             for (let j = 0; j < addresses.length; j++) {
                 const address = addresses[j];
-                console.log(address);
-                const relevantTransactions =  block.transactions.filter(
-                    (tx) => tx.from === address.toLowerCase() || tx.to === address.toLowerCase()
-                );
+                console.log("filtered address:",address);
 
-                console.log(relevantTransactions);
+                //@ts-ignore
+                const relevantTransactions = (block.transactions as EthereumTransaction[])
+                    .filter((tx) => {
+                        //@ts-ignore
+                        return tx.from === address.toLowerCase() || (tx.to === address.toLowerCase());
+                    });
+
 
                 relevantTransactions.forEach((tx) => {
                     transactions.push({
                         blockNumber: tx.blockNumber.toString(),
                         from: tx.from,
-                        to: tx.to,
+                        to: tx.to, // 可能为 null，使用 null 作为备选值
                         hash: tx.hash,
                         value: web3.utils.fromWei(tx.value, 'ether'),
-                        // input: tx.input,
                     });
                 });
             }

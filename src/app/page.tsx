@@ -1,15 +1,13 @@
 'use client'
 
-import Image from 'next/image'
-// import React, {useContext, useState} from 'react';
+// import Image from 'next/image'
 import { ScanBlocks } from '@/components/ScanBlocks';
 import Web3 from 'web3';
 
 export default function Home() {
     const web3 = new Web3('https://rpc.dimai.ai') as Web3;
-  // console.log('web3Provider initialized:', web3);
 
-  return (
+    return (
     <main className="flex min-h-screen flex-col items-center justify-between p-20">
       <div className="z-1 max-w-5xl items-center justify-between font-mono text-sm lg:flex">
         <p className="fixed left-0 top-0 flex w-full justify-center font-bold border-b border-gray-300 bg-gradient-to-b lg:static  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">

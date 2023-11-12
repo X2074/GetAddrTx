@@ -6,7 +6,7 @@ import Web3 from 'web3';
 import config from './config';
 
 export const app = express();
-const port = 3011; // 或者你想要使用的端口
+const port = 3012; // 或者你想要使用的端口
 const  web3Provider = new Web3.providers.HttpProvider(config.web3.rpc);
 console.log(web3Provider)
 // 定义以太坊交易对象类型

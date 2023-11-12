@@ -52,7 +52,7 @@ export function ScanBlocks() {
         console.log("getting data from backend...")
 
         // 发送请求到后端接口
-        fetch('http://localhost:3011/scanBlocks', {
+        fetch('http://localhost:3012/scanBlocks', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

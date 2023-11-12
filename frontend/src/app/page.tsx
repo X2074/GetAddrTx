@@ -1,11 +1,11 @@
 'use client'
 
 // import Image from 'next/image'
-import { ScanBlocks } from '@/components/ScanBlocks';
-import Web3 from 'web3';
+import { ScanBlocks } from '@/components/BackendScanBlocks';
+// import Web3 from 'web3';
 
 export default function Home() {
-    const web3 = new Web3('https://rpc.dimai.ai') as Web3;
+    // const web3 = new Web3('https://rpc.dimai.ai') as Web3;
 
     return (
     <main className="flex min-h-screen flex-col items-center justify-between p-20">
@@ -16,7 +16,8 @@ export default function Home() {
       </div>
 
 
-      <ScanBlocks web3Provider={web3} />
+      {/*<ScanBlocks web3Provider={web3} />*/}
+      <ScanBlocks/>
 
     </main>
   )

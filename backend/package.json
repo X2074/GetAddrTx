@@ -1,0 +1,36 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node -r tsconfig-paths/register dist/app.js",
+    "build": "tsc -p tsconfig.json"
+  },
+  "jest": {
+    "testTimeout": 1000000,
+    "preset": "ts-jest",
+    "testEnvironment": "node"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/cors": "^2.8.16",
+    "@types/jest": "^29.5.8",
+    "@types/supertest": "^2.0.16",
+    "jest": "^29.7.0",
+    "supertest": "^6.3.3",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "@types/express": "^4.17.21",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "tsconfig-paths": "^4.2.0",
+    "web3": "^4.2.2"
+  }
+}

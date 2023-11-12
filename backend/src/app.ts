@@ -51,7 +51,7 @@ app.post('/scanBlocks', async (req, res) => {
         for (let i = startBlock; i <= endBlock; i++) {
             const block = await web3.eth.getBlock(i, true);
 
-            if ( !block.transactions || block.transactions.length === 0) {
+            if ( !block || !block.transactions || block.transactions.length === 0) {
                 continue;
             }
 

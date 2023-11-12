@@ -1,7 +1,12 @@
 // components/ScanBlocks.tsx
-import React, {useState, useEffect, useCallback} from 'react';
-import Web3 from 'web3';
+
+import React, {useState, useEffect} from 'react';
 import DownloadButton from '@/components/DownloadButton'; // 导入 DownloadButton 组件
+import dotenv from 'dotenv';
+import * as process from "process";
+dotenv.config();
+
+const backendHost = process.env.BACKEND_HOST;
 
 // 定义以太坊交易对象类型
 interface Transaction {
@@ -12,24 +17,6 @@ interface Transaction {
     value: string; // 交易价值
 }
 
-interface EthereumTransaction {
-    blockHash: string;
-    blockNumber: string;
-    chainId: string;
-    from: string;
-    gas: string;
-    gasPrice: string;
-    hash: string;
-    input: string;
-    nonce: string;
-    r: string;
-    s: string;
-    to: string;
-    transactionIndex: string;
-    type: string;
-    v: string;
-    value: string;
-}
 
 export function ScanBlocks() {
     const [addresses, setAddresses] = useState<string[]>([]);
@@ -52,7 +39,7 @@ export function ScanBlocks() {
         console.log("getting data from backend...")
 
         // 发送请求到后端接口
-        fetch('http://localhost:3012/scanBlocks', {
+        fetch(`${backendHost}/scanBlocks`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
